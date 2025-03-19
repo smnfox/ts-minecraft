@@ -1,20 +1,22 @@
 {
-  "name": "discoverthreejs-course",
+  "name": "ts-minecraft",
   "version": "1.0.0",
-  "author": "Winston Cooke",
   "scripts": {
     "start": "webpack serve",
     "start:open": "webpack serve --open",
     "build": "webpack --mode=production",
-    "lint": "eslint \"**/*.ts\""
+    "lint": "eslint \"**/*.ts\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@types/stats.js": "^0.17.3",
     "stats.js": "^0.17.0",
-    "three": "^0.160.0"
+    "three": "^0.172.0",
+    "gh-pages": "^6.1.1"
   },
   "devDependencies": {
-    "@types/three": "^0.160.0",
+    "@types/three": "^0.173.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.56.0",

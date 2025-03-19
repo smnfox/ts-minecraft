@@ -1,23 +1,18 @@
 import { World } from './World/World';
-
-document.querySelector('#h1')?.append('Three.js Template');
+//import WebGL from 'three/addons/capabilities/WebGL.js';
 
 async function main() {
-  const container = document.querySelector(
-    '#scene-container'
-  ) as HTMLCanvasElement;
+  const container = document.querySelector('#scene-container') as HTMLCanvasElement;
+
+  // if (!WebGL.isWebGL2Available()) {
+  //   const warning = WebGL.getWebGLErrorMessage();
+  //   container.appendChild(warning);
+  //   return;
+  // }
 
   const world = new World(container);
   await world.init();
   world.start();
-
-  // addEventListener('click', () => {
-  //   if (world.isRunning() === false) {
-  //     world.start();
-  //   } else {
-  //     world.stop();
-  //   }
-  // });
 }
 
 main().catch((err) => {

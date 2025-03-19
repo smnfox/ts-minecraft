@@ -1,9 +1,9 @@
-import { PerspectiveCamera, WebGL1Renderer, WebGLRenderer } from 'three';
+import { PerspectiveCamera, WebGLRenderer } from 'three';
 
 interface ResizerTypes {
   container: HTMLCanvasElement;
   camera: PerspectiveCamera;
-  renderer: WebGLRenderer | WebGL1Renderer;
+  renderer: WebGLRenderer;
 }
 
 const setSize = ({ container, camera, renderer }: ResizerTypes) => {
@@ -18,11 +18,8 @@ class Resizer {
 
     window.addEventListener('resize', () => {
       setSize({ container, camera, renderer });
-      this.onResize(); // custom event hook
     });
   }
-
-  onResize() {}
 }
 
 export { Resizer };

@@ -2,7 +2,6 @@ import {
   OrthographicCamera,
   PerspectiveCamera,
   Scene,
-  WebGL1Renderer,
   WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -13,8 +12,8 @@ import { loadModels } from './components/models/loadModels';
 import { createScene } from './components/scene';
 import { createControls } from './systems/controls';
 import { Loop } from './systems/Loop';
-import { createRenderer } from './systems/renderer';
 import { Resizer } from './systems/Resizer';
+import { createCube } from './components/objects/cube';
 
 /**
  * If two instances of the World class are created, the second instance will
@@ -23,21 +22,15 @@ import { Resizer } from './systems/Resizer';
  */
 let camera: PerspectiveCamera | OrthographicCamera;
 let scene: Scene;
-let renderer: WebGLRenderer | WebGL1Renderer;
+let renderer: WebGLRenderer;
 let controls: OrbitControls;
 let loop: Loop;
 let isRunning: boolean;
 class World {
   constructor(container: HTMLCanvasElement) {
     camera = createCamera();
-
-    /**
-     * Set the scene's background color to the same as the container's
-     * background color in index.css to prevent flashing on load
-     * (src/styles/index.css #scene-container)
-     */
     scene = createScene({ backgroundColor: 'transparent' });
-    renderer = createRenderer();
+    renderer = new WebGLRenderer({ antialias: true });
     controls = createControls({ camera: camera, canvas: renderer.domElement });
     loop = new Loop({ camera, scene, renderer });
     container.append(renderer.domElement);
@@ -56,19 +49,10 @@ class World {
   }
 
   async init() {
-    const { parrot } = await loadModels();
-    controls.target.copy(parrot.position);
-
-    loop.updatables.push(parrot);
-    scene.add(parrot);
+    await loadModels();
+    createCube({cubeType: 'basic'});
   }
 
-  // for apps that update occasionally
-  render() {
-    renderer.render(scene, camera);
-  }
-
-  // for apps with constant animation
   start() {
     loop.start();
     isRunning = true;

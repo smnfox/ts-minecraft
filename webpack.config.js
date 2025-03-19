@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   mode: 'development',
@@ -7,13 +7,13 @@ module.exports = {
     port: 9000,
     static: {
       serveIndex: true,
-      directory: __dirname
-    }
+      directory: __dirname,
+    },
   },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/'
+    publicPath: '/dist/',
   },
   resolve: {
     extensions: ['.ts', '.js']
@@ -23,11 +23,11 @@ module.exports = {
       {
         test: /\.ts$/,
         use: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
-    ]
+    ],
   },
   watchOptions: {
-    ignored: /node_modules/
-  }
+    ignored: /node_modules/,
+  },
 }

@@ -3,7 +3,6 @@ import {
   OrthographicCamera,
   PerspectiveCamera,
   Scene,
-  WebGL1Renderer,
   WebGLRenderer,
 } from 'three';
 import * as Stats from 'stats.js';
@@ -11,7 +10,7 @@ import * as Stats from 'stats.js';
 interface LoopTypes {
   camera: PerspectiveCamera | OrthographicCamera;
   scene: Scene;
-  renderer: WebGLRenderer | WebGL1Renderer;
+  renderer: WebGLRenderer;
 }
 
 const clock = new Clock();
